@@ -9,6 +9,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+const string corsAllowOriginsString = "_corsAllowOrigins";
+
+builder.Services.AddCors(options =>
+    options.AddPolicy(corsAllowOriginsString,
+        policy => policy
+        .WithOrigins(builder.Configuration["ClientUrl"]!)
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+    )
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +33,8 @@ app.UseDefaultFiles();
 app.MapStaticAssets();
 
 app.UseHttpsRedirection();
+
+app.UseCors(corsAllowOriginsString);
 
 app.UseAuthorization();
 
