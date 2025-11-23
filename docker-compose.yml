@@ -1,0 +1,9 @@
+services:
+  ludome.server:
+    image: ${DOCKER_REGISTRY-}ludomeserver
+    build:
+      context: .
+      dockerfile: src/Ludome.Server/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"

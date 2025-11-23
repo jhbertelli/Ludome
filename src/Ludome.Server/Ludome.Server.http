@@ -1,0 +1,6 @@
+@Ludome.Server_HostAddress = https://localhost:8081
+
+GET {{Ludome.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
