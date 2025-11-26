@@ -7,3 +7,16 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
+  ludome.database:
+    image: postgres:latest
+    container_name: ludome.postgres_db
+    environment:
+      - POSTGRES_DB=ludome
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    volumes:
+      - ludome_db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+volumes:
+  ludome_db:

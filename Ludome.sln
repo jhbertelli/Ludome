@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludome.Server", "src\Ludome
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Ludome.Client", "src\Ludome.Client\Ludome.Client.esproj", "{E88932A8-3D11-8699-80B5-19A4B2A95866}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludome.Infrastructure", "src\Ludome.Infrastructure\Ludome.Infrastructure.csproj", "{93349832-0EB9-454B-9428-EAAB68924292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludome.Domain", "src\Ludome.Domain\Ludome.Domain.csproj", "{D1B7E3E0-E8BC-4B0E-8722-78FD0B91946E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ludome.Application.Contracts", "src\Ludome.Application.Contracts\Ludome.Application.Contracts.csproj", "{E751F17E-9AEC-49BA-A868-AFBA90F23A34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +35,18 @@ Global
 		{E88932A8-3D11-8699-80B5-19A4B2A95866}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E88932A8-3D11-8699-80B5-19A4B2A95866}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E88932A8-3D11-8699-80B5-19A4B2A95866}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{93349832-0EB9-454B-9428-EAAB68924292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93349832-0EB9-454B-9428-EAAB68924292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93349832-0EB9-454B-9428-EAAB68924292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93349832-0EB9-454B-9428-EAAB68924292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1B7E3E0-E8BC-4B0E-8722-78FD0B91946E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B7E3E0-E8BC-4B0E-8722-78FD0B91946E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B7E3E0-E8BC-4B0E-8722-78FD0B91946E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1B7E3E0-E8BC-4B0E-8722-78FD0B91946E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E751F17E-9AEC-49BA-A868-AFBA90F23A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E751F17E-9AEC-49BA-A868-AFBA90F23A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E751F17E-9AEC-49BA-A868-AFBA90F23A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E751F17E-9AEC-49BA-A868-AFBA90F23A34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

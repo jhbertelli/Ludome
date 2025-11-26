@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -22,9 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ludome.Application.Contracts\Ludome.Application.Contracts.csproj" />
     <ProjectReference Include="..\Ludome.Client\Ludome.Client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Ludome.Domain\Ludome.Domain.csproj" />
+    <ProjectReference Include="..\Ludome.Infrastructure\Ludome.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
