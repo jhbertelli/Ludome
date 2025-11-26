@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ludome.Server.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AuthController
     {
         private readonly UserManager<User> _userManager;
