@@ -9,16 +9,10 @@ namespace Ludome.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController
+    public class AuthController(UserManager<User> userManager, ITokenRepository tokenRepository)
     {
-        private readonly UserManager<User> _userManager;
-        private readonly ITokenRepository _tokenRepository;
-
-        public AuthController(UserManager<User> userManager, ITokenRepository tokenRepository)
-        {
-            _userManager = userManager;
-            _tokenRepository = tokenRepository;
-        }
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly ITokenRepository _tokenRepository = tokenRepository;
 
         [HttpPost]
         [Route("Register")]

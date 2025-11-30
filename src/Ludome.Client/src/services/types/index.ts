@@ -1,3 +1,6 @@
+export * from './game-output'
+export * from './get-popular-games-input'
 export * from './login-input'
 export * from './login-response-output'
 export * from './register-input'
+export * from './search-games-input'

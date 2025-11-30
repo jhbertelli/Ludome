@@ -1,12 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { LOCAL_STORAGE_KEYS } from 'constants/local-storage'
-import { useNavigate } from 'react-router-dom'
+import { pathTo } from 'constants/paths'
 import { useLocalStorage } from 'react-use'
 import { AuthService } from 'services/auth-service'
 import { configureAuthorizationHeader } from 'services/axios'
 
 export const useLogin = () => {
-    const navigate = useNavigate()
     const [, setLocalStorage] = useLocalStorage(LOCAL_STORAGE_KEYS.JWT_TOKEN, '', { raw: true })
 
     return useMutation({
@@ -14,7 +13,7 @@ export const useLogin = () => {
         onSuccess: ({ data: { jwtToken } }) => {
             setLocalStorage(jwtToken)
             configureAuthorizationHeader()
-            // navigate(pathTo.)
+            location.pathname = pathTo.games
         },
     })
 }

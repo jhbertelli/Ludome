@@ -23,7 +23,7 @@ export const LoginPage = () => {
     const onSubmit: SubmitHandler<LoginSchema> = async (data) => await login.mutateAsync(data)
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="h-full flex flex-col justify-between">
+        <form onSubmit={handleSubmit(onSubmit)} className="h-full flex flex-col justify-between mx-auto p-6 max-w-xl">
             <div className="flex flex-col gap-4">
                 <Title className="text-center">Login</Title>
 
