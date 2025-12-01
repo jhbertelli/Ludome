@@ -1,5 +1,5 @@
 export interface GameOutput {
-    id: number
+    id: string
     title: string
     rating: number
     reviewsCount: number

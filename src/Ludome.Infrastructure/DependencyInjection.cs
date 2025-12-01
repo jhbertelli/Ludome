@@ -28,6 +28,8 @@ namespace Ludome.Infrastructure
             services.ConfigureRepositories();
 
             services.ConfigureIdentity(appSettings);
+
+            services.ConfigureSession();
         }
 
         public static async Task MigrateDatabase(this IServiceProvider appServices)
@@ -38,6 +40,19 @@ namespace Ludome.Infrastructure
                 .GetRequiredService<LudomeDbContext>();
 
             await dbContext.Database.MigrateAsync();
+            await Seeder.SeedAsync(dbContext);
+        }
+
+        private static void ConfigureSession(this IServiceCollection services)
+        {
+            services.AddDistributedMemoryCache();
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         private static void ConfigureIdentity(this IServiceCollection services, ConfigurationManager appSettings)
@@ -75,6 +90,7 @@ namespace Ludome.Infrastructure
         private static void ConfigureRepositories(this IServiceCollection services)
         {
             services.AddScoped<ITokenRepository, TokenRepository>();
+            services.AddScoped<IGameRepository, GameRepository>();
         }
     }
 }

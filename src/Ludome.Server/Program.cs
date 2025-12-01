@@ -20,10 +20,13 @@ builder.Services.AddCors(options =>
         .WithOrigins(builder.Configuration["ClientUrl"]!)
         .AllowAnyHeader()
         .AllowAnyMethod()
+        .AllowCredentials()
     )
 );
 
 var app = builder.Build();
+
+await app.Services.MigrateDatabase();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -31,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSession();
 
 app.UseDefaultFiles();
 app.MapStaticAssets();

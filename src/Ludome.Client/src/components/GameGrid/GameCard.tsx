@@ -1,8 +1,12 @@
 import { Star } from 'react-feather'
 import { GameOutput } from 'services/types'
 
-export const GameCard = ({ id, image, rating, reviewsCount, title }: GameOutput) => (
-    <div key={`game_${id}`} className="flex flex-col gap-2">
+interface GameCardProps extends GameOutput {
+    onClick?: () => void
+}
+
+export const GameCard = ({ image, rating, reviewsCount, title, onClick }: GameCardProps) => (
+    <div className="flex flex-col gap-2 cursor-pointer" onClick={onClick}>
         <div className="relative group overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-shadow aspect-3/4">
             <img
                 src={image}
@@ -16,7 +20,7 @@ export const GameCard = ({ id, image, rating, reviewsCount, title }: GameOutput)
         </div>
         <div className="flex items-center justify-center gap-1 text-sm">
             <Star className="fill-yellow-400 " color="transparent" />
-            <span className="font-medium text-gray-900">{rating}</span>
+            <span className="font-medium text-gray-900">{(rating / 2).toFixed(1)}</span>
             <span className="text-gray-500">({reviewsCount})</span>
         </div>
     </div>

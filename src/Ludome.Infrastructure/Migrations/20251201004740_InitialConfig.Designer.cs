@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ludome.Infrastructure.Migrations
 {
     [DbContext(typeof(LudomeDbContext))]
-    [Migration("20251130014310_AddGames")]
-    partial class AddGames
+    [Migration("20251201004740_InitialConfig")]
+    partial class InitialConfig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,6 +146,12 @@ namespace Ludome.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("CreatorUserId")
                         .HasColumnType("uuid");

@@ -23,7 +23,13 @@
         public void AddRating(Rating rating)
             => Ratings.Add(rating);
 
-        public void RemoveRating(Rating rating)
-            => Ratings.Remove(rating);
+        public void RemoveRating(Guid ratingId)
+        {
+            var rating = Ratings.FirstOrDefault(rating => rating.Id == ratingId);
+
+            //if (rating is null) throw new Exception();
+
+            Ratings.Remove(rating!);
+        }
     }
 }

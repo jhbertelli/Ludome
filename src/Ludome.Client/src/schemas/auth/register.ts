@@ -10,7 +10,7 @@ const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@\-#.$%^&*])[a-zA-Z0-9!@\-
 export const registerSchema = z
     .object({
         email: z.email('Insira um e-mail válido'),
-        nickname: z.string().nonempty('Insira um nome'),
+        nickname: z.string().nonempty('Insira um apelido'),
         password: z.string().nonempty('Insira uma senha').regex(PASSWORD_REGEX),
         repeatPassword: z.string().nonempty('Insira uma senha'),
     })

@@ -9,7 +9,7 @@ namespace Ludome.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController(UserManager<User> userManager, ITokenRepository tokenRepository)
+    public class AuthController(UserManager<User> userManager, ITokenRepository tokenRepository) : ControllerBase
     {
         private readonly UserManager<User> _userManager = userManager;
         private readonly ITokenRepository _tokenRepository = tokenRepository;
@@ -18,7 +18,7 @@ namespace Ludome.Server.Controllers
         [Route("Register")]
         public async Task RegisterAsync(RegisterInput input)
         {
-            var user = new User(input.Email, input.Name);
+            var user = new User(input.Email, input.Nickname);
 
             var identityResult = await _userManager.CreateAsync(user, input.Password);
 
@@ -52,6 +52,8 @@ namespace Ludome.Server.Controllers
             {
                 JwtToken = token
             };
+
+            HttpContext.Session.SetLoggedUser(user);
 
             return response;
         }

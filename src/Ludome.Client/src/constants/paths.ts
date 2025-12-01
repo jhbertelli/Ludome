@@ -6,12 +6,14 @@ export const paths = {
     register: REGISTER,
     login: LOGIN,
     games: GAMES,
+    game: GAMES + '/:id',
 }
 
 const pathTo = {
     register: `/${REGISTER}`,
     login: `/${LOGIN}`,
     games: `/${GAMES}`,
+    game: (id: string) => `/${GAMES}/${id}`,
 }
 
 export { pathTo }
