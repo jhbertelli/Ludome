@@ -12,9 +12,8 @@ namespace Ludome.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GameController(UserManager<User> userManager, IGameRepository gameRepository) : ControllerBase
+    public class GameController(IGameRepository gameRepository) : ControllerBase
     {
-        private readonly UserManager<User> _userManager = userManager;
         private readonly IGameRepository _gameRepository = gameRepository;
 
         [HttpGet]
@@ -37,6 +36,25 @@ namespace Ludome.Server.Controllers
                 .ToArrayAsync();
 
             return games;
+        }
+        
+        [HttpGet]
+        [Route("GetCategories")]
+        public async Task<CategoryOutput[]> GetCategoriesAsync()
+        {
+            var categories = await _gameRepository
+                .AsQueryable()
+                .Include(game => game.Categories)
+                .SelectMany(game => game.Categories)
+                .Distinct()
+                .Select(category => new CategoryOutput
+                {
+                    Name = category.Name,
+                    Id = category.Id
+                })
+                .ToArrayAsync();
+
+            return categories;
         }
 
         [HttpGet]
@@ -138,10 +156,37 @@ namespace Ludome.Server.Controllers
             await _gameRepository.SaveChangesAsync();
         }
 
-        //[HttpGet]
-        //public async Task<GameOutput> Search()
-        //{
+        [HttpGet]
+        [Route("Search")]
+        public async Task<GameOutput[]> SearchAsync([FromQuery] SearchGamesInput input)
+        {
+            var gamesQuery = _gameRepository
+                .AsQueryable()
+                .Include(game => game.Ratings)
+                .Include(game => game.Categories)
+                .Where(game => game.Title.ToLower().Contains(input.Search.Trim().ToLower()))
+                .WhereIf(input.CategoryIds.Length != 0, game => input.CategoryIds.All(id => game.Categories.Any(c => c.Id == id)))
+                // para OU:
+                //.WhereIf(input.CategoryIds.Length != 0, game => game.Categories.Any(c => input.CategoryIds.Contains(c.Id)))
+                .Select(game => new GameOutput
+                {
+                    Id = game.Id,
+                    Title = game.Title,
+                    Image = game.Image,
+                    Rating = (double?)game.Ratings.Average(rating => rating.Score) ?? 0,
+                    ReviewsCount = game.Ratings.Count
+                });
 
-        //}
+            var games = await (input.SortBy switch
+                {
+                    SearchSort.Reviews => gamesQuery.OrderByDescending(g => g.ReviewsCount),
+                    SearchSort.NameAsc => gamesQuery.OrderBy(g => g.Title),
+                    SearchSort.NameDesc => gamesQuery.OrderByDescending(g => g.Title),
+                    _ => throw new NotImplementedException()
+                })
+                .ToArrayAsync();
+
+            return games;
+        }
     }
 }

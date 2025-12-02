@@ -2,6 +2,6 @@
 {
     public class GetPopularGamesInput
     {
-        public long[] CategoryIds { get; set; } = [];
+        public Guid[] CategoryIds { get; set; } = [];
     }
 }

@@ -1,3 +1,4 @@
+export * from './category-output'
 export * from './delete-rating-input'
 export * from './game-detail-output'
 export * from './game-output'

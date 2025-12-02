@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { GamesService } from 'services/games-service'
-import { GetPopularGamesInput } from 'services/types'
 
-export const useGetPopularGames = (filter: GetPopularGamesInput) =>
+export const useGetPopularGames = ({ enabled }: { enabled?: boolean }) =>
     useQuery({
-        queryFn: () => GamesService.getPopular(filter),
+        queryFn: () => GamesService.getPopular({ categoryIds: [] }),
         select: (response) => response.data,
-        queryKey: ['get_popular_games', filter],
+        queryKey: ['get_popular_games'],
+        enabled,
     })

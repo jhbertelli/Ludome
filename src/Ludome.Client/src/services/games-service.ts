@@ -1,13 +1,30 @@
+import qs from 'qs'
 import axios from 'services/axios'
-import { DeleteRatingInput, GameDetailOutput, GameOutput, GetPopularGamesInput, RatingOutput } from './types'
+import {
+    CategoryOutput,
+    DeleteRatingInput,
+    GameDetailOutput,
+    GameOutput,
+    GetPopularGamesInput,
+    RatingOutput,
+    SearchGamesInput,
+} from './types'
 import { RatingInput } from './types/rating-input'
 
 const servicePath = import.meta.env.VITE_BACKEND_URL + 'api/Game/'
 
 export class GamesService {
     static async getPopular(input: GetPopularGamesInput) {
-        return await axios.get<GameOutput[], any, GetPopularGamesInput>(`${servicePath}GetPopular`, {
+        return await axios.get<GameOutput[]>(`${servicePath}GetPopular`, {
             params: input,
+            paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
+        })
+    }
+
+    static async search(input: SearchGamesInput) {
+        return await axios.get<GameOutput[]>(`${servicePath}Search`, {
+            params: input,
+            paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' }),
         })
     }
 
@@ -25,5 +42,9 @@ export class GamesService {
 
     static async deleteRating(input: DeleteRatingInput) {
         return await axios.delete<void>(`${servicePath}DeleteRating`, { data: input })
+    }
+
+    static async getCategories() {
+        return await axios.get<CategoryOutput[]>(`${servicePath}GetCategories`)
     }
 }
