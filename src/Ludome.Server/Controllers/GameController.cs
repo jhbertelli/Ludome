@@ -106,7 +106,7 @@ namespace Ludome.Server.Controllers
                     ReviewDate = rating.CreatedAt,
                     UserNickname = rating.CreatorUser.Nickname
                 })
-                .OrderBy(rating => rating.IsMine)
+                .OrderByDescending(rating => rating.IsMine)
                 .ThenByDescending(rating => rating.ReviewDate)
                 .ToArrayAsync();
 

@@ -11,7 +11,13 @@ export const registerSchema = z
     .object({
         email: z.email('Insira um e-mail válido'),
         nickname: z.string().nonempty('Insira um apelido'),
-        password: z.string().nonempty('Insira uma senha').regex(PASSWORD_REGEX),
+        password: z
+            .string()
+            .nonempty('Insira uma senha')
+            .regex(
+                PASSWORD_REGEX,
+                `Senhas devem conter pelo menos: 1 letra minúscula, 1 número, 1 caractere especial (!@-#.$%^&*) e tamanho mínimo de 8 caracteres`
+            ),
         repeatPassword: z.string().nonempty('Insira uma senha'),
     })
     .refine((schema) => schema.password === schema.repeatPassword, {

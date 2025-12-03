@@ -57,5 +57,12 @@ namespace Ludome.Server.Controllers
 
             return response;
         }
+
+        [HttpPost]
+        [Route("Logout")]
+        public async Task LogoutAsync()
+        {
+            HttpContext.Session.RemoveLoggedUser();
+        }
     }
 }

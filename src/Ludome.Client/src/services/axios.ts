@@ -5,6 +5,10 @@ export function configureAuthorizationHeader() {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem(LOCAL_STORAGE_KEYS.JWT_TOKEN)
 }
 
+export function removeAuthorizationHeader() {
+    axios.defaults.headers.common['Authorization'] = undefined
+}
+
 configureAuthorizationHeader()
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.withCredentials = true

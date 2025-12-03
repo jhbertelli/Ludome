@@ -11,4 +11,8 @@ export class AuthService {
     static async login(input: LoginInput) {
         return await axios.post<LoginResponseOutput>(servicePath + 'Login', input)
     }
+
+    static async logout() {
+        return await axios.post<void>(servicePath + 'Logout')
+    }
 }
