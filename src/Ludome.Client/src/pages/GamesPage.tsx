@@ -34,7 +34,7 @@ export default function GamesPage() {
         <div className="min-h-screen font-sans">
             <Header />
 
-            <div className="container mx-auto px-6 py-8 flex flex-col md:flex-row gap-8">
+            <div className="container mx-auto px-6 py-8 flex flex-col-reverse md:flex-row gap-8">
                 <main className="flex-1">
                     <h2 className="text-3xl font-bold mb-6">
                         {isSearch ? 'Resultados da pesquisa' : 'Jogos populares'}

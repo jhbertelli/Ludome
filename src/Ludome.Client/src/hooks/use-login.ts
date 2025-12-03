@@ -1,3 +1,4 @@
+import { notifications } from '@mantine/notifications'
 import { useMutation } from '@tanstack/react-query'
 import { LOCAL_STORAGE_KEYS } from 'constants/local-storage'
 import { pathTo } from 'constants/paths'
@@ -14,6 +15,13 @@ export const useLogin = () => {
             setLocalStorage(jwtToken)
             configureAuthorizationHeader()
             location.pathname = pathTo.games
+        },
+        onError: (err) => {
+            notifications.show({
+                title: 'Erro no login',
+                message: (err as any).response.data.errorMessage || 'Ocorreu um erro.',
+                color: 'red',
+            })
         },
     })
 }
